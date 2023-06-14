@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">magpie</string>
+    <string name="label_filters">Filters</string>
+    <string name="label_effects">Effects</string>
 </resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/imageFilterDemoFragment"
+        android:icon="@drawable/ic_filter"
+        android:title="@string/label_filters" />
+    <item
+        android:id="@+id/imageEffectsDemoFragment"
+        android:icon="@drawable/ic_photo_effect"
+        android:title="@string/label_effects" />
+</menu>
