@@ -2,4 +2,9 @@
     <string name="app_name">magpie</string>
     <string name="label_filters">Filters</string>
     <string name="label_effects">Effects</string>
+    <string name="label_filter_invert">Invert (Caution)</string>
+    <string name="label_filter_sepia">Sepia</string>
+    <string name="cd_demo_image">Demo image</string>
+    <string name="label_filter_none">None</string>
+    <string name="label_filter_greyscale">Greyscale</string>
 </resources>
