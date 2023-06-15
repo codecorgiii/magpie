@@ -37,6 +37,7 @@ class ImageFilterDemoFragment : Fragment() {
                 R.id.filterGreyscaleButton -> Filter.GREYSCALE
                 R.id.filterSepiaButton -> Filter.SEPIA
                 R.id.filterInvertButton -> Filter.INVERT
+                R.id.filterHueRotate90Button -> Filter.HUE_ROTATE
                 else -> Filter.NONE
             }
             applyFilterToDemoImage(currentFilter)
@@ -51,6 +52,7 @@ class ImageFilterDemoFragment : Fragment() {
         GREYSCALE,
         SEPIA,
         INVERT,
+        HUE_ROTATE
     }
 
     private fun applyFilterToDemoImage(filter: Filter) {
@@ -59,6 +61,7 @@ class ImageFilterDemoFragment : Fragment() {
             Filter.GREYSCALE -> binding.demoImageView.applyGreyscaleFilter()
             Filter.SEPIA -> binding.demoImageView.applySepiaFilter()
             Filter.INVERT -> binding.demoImageView.applyInvertFilter()
+            Filter.HUE_ROTATE -> binding.demoImageView.applyHueRotationFilter(90f)
         }
     }
 
@@ -128,6 +131,59 @@ class ImageFilterDemoFragment : Fragment() {
         """
         val shader = RuntimeShader(shaderSrc)
         this.setRenderEffect(RenderEffect.createRuntimeShaderEffect(shader, "viewSrc"))
+    }
+
+    /**
+     * https://chilliant.com/rgb2hsv.html
+     * https://thebookofshaders.com/06/
+     */
+    fun View.applyHueRotationFilter(@FloatRange(from = -360.0, to = 360.0) degrees: Float) {
+        val shaderSrc = """
+            uniform shader uViewSrc;
+            uniform float uDegrees;
+            
+            float normalize(float min, float max, float value) {
+                return (value - min) / (max - min);
+            }
+            
+            vec3 rgb2hsb( vec3 c ){
+                vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+                vec4 p = mix(vec4(c.bg, K.wz),
+                             vec4(c.gb, K.xy),
+                             step(c.b, c.g));
+                vec4 q = mix(vec4(p.xyw, c.r),
+                             vec4(c.r, p.yzx),
+                             step(p.x, c.r));
+                float d = q.x - min(q.w, q.y);
+                float e = 1.0e-10;
+                return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)),
+                            d / (q.x + e),
+                            q.x);
+            }
+            
+            //  Function from Iñigo Quiles
+            //  https://www.shadertoy.com/view/MsS3Wc
+            vec3 hsb2rgb( vec3 c ){
+                vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
+                                         6.0)-3.0)-1.0,
+                                 0.0,
+                                 1.0 );
+                rgb = rgb*rgb*(3.0-2.0*rgb);
+                return c.z * mix(vec3(1.0), rgb, c.y);
+            }
+
+            half4 main(float2 fragCoord) {
+                vec4 fragSrc = uViewSrc.eval(fragCoord);
+                vec3 fragColorHsb = rgb2hsb(fragSrc.rgb);
+                // x here is the normalized hue component
+                fragColorHsb.x = fragColorHsb.x + (mod(normalize(0.0, 360.0, uDegrees), 2.0) - 1.0);
+                return half4(hsb2rgb(fragColorHsb), 1.0);
+            }
+        """
+        val shader = RuntimeShader(shaderSrc).apply {
+            setFloatUniform("uDegrees", degrees)
+        }
+        this.setRenderEffect(RenderEffect.createRuntimeShaderEffect(shader, "uViewSrc"))
     }
 
     companion object {

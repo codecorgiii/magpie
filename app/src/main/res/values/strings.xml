@@ -7,4 +7,5 @@
     <string name="cd_demo_image">Demo image</string>
     <string name="label_filter_none">None</string>
     <string name="label_filter_greyscale">Greyscale</string>
+    <string name="label_filter_hue_rotate_90">Hue rotate 90°</string>
 </resources>

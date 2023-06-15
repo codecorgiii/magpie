@@ -47,6 +47,12 @@
             android:text="@string/label_filter_sepia" />
 
         <RadioButton
+            android:id="@+id/filterHueRotate90Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_filter_hue_rotate_90" />
+
+        <RadioButton
             android:id="@+id/filterInvertButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
