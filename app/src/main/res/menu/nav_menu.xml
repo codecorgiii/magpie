@@ -8,4 +8,8 @@
         android:id="@+id/imageEffectsDemoFragment"
         android:icon="@drawable/ic_photo_effect"
         android:title="@string/label_effects" />
+    <item
+        android:id="@+id/animationsDemoFragment"
+        android:icon="@drawable/ic_animation"
+        android:title="@string/label_animations" />
 </menu>

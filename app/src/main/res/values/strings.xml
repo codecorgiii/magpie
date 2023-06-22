@@ -12,4 +12,7 @@
     <string name="label_effect_pixelize">Pixelize</string>
     <string name="label_effect_gaussian_blur">Gaussian blur</string>
     <string name="label_effect_box_blur">Box blur</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_animations">Animations</string>
 </resources>

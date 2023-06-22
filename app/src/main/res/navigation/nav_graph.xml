@@ -14,4 +14,9 @@
         android:name="com.example.magpie.ImageEffectsDemoFragment"
         android:label="fragment_image_effects_demo"
         tools:layout="@layout/fragment_image_effects_demo" />
+    <fragment
+        android:id="@+id/animationsDemoFragment"
+        android:name="com.example.magpie.AnimationsDemoFragment"
+        android:label="fragment_animations_demo"
+        tools:layout="@layout/fragment_animations_demo" />
 </navigation>
