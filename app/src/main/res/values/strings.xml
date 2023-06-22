@@ -8,4 +8,8 @@
     <string name="label_filter_none">None</string>
     <string name="label_filter_greyscale">Greyscale</string>
     <string name="label_filter_hue_rotate_90">Hue rotate 90°</string>
+    <string name="label_effect_acrylic">Acrylic attempt</string>
+    <string name="label_effect_pixelize">Pixelize</string>
+    <string name="label_effect_gaussian_blur">Gaussian blur</string>
+    <string name="label_effect_box_blur">Box blur</string>
 </resources>
